@@ -54,3 +54,51 @@ void LinkedList::print(){
     cout << "nullptr" << endl;
     cout << "Tail:" << this->tail->value<< endl;
 }
+
+void LinkedList::remove(int x){
+    // 1er caso: vacio
+    if(this->head == nullptr) return;
+
+    // 2do caso: tengo un elemento y es el que quiero borrar
+    if(this->head == this->tail){
+        if(this->head->value == x){
+            Node* tmp = this->head;
+
+            this->head = this->head->next;
+            this->tail = this->tail->next;
+
+            // this.head = nullptr;
+            // this.tail = nullptr;
+            // estos son lo mismo que arriba
+
+            delete tmp;
+
+        } else {
+            return;
+        }
+    }
+
+    // 3er caso: contiene mas de un elemento, borrar la cabeza
+    if(this->head->value == x){
+        Node* tmp = this->head;
+        this->head = this->head->next;
+        delete tmp;
+    }
+
+    // 4to caso: es la cola el que se quiere borrar
+    if(this->tail->value == x){
+        Node* it = this->head;
+        // iterar hasta llegar al penultimo
+        while(it->next != this->tail){
+            it = it->next;
+        }
+
+        // it ya esta en el penultimo
+        Node* tmp = this->tail;
+        this->tail = it;
+        delete tmp;
+
+
+    }
+}
+
