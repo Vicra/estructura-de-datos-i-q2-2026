@@ -1,13 +1,15 @@
 #include "node.h"
+#include "linkedlist.h"
 #include <iostream>
 
 using std::cout;
 using std::endl;
 
 void printList(Node* root){
-    while(root!=nullptr){
-        cout << root->value << ", ";
-        root = root->next;
+    Node* it = root;
+    while(it!=nullptr){
+        cout << it->value << ", ";
+        it = it->next;
     }
 }
 
@@ -34,5 +36,18 @@ int main() {
     delete n1;
     delete n2;
     delete n3;
+
+    cout << "Linked list" << endl;
+    LinkedList l;
+    // l.insert(10);
+    // l.insert(20);
+    // l.insert(30);
+    // l.insert(40);
+    // l.insert(50);
+    l.pushFront(10);
+    l.pushFront(20);
+    l.pushFront(30);
+    l.print();
+
     return 0;
 }

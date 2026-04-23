@@ -8,6 +8,7 @@ qt_standard_project_setup()
 qt_add_executable(SimpleLinkedList
     main.cpp
     node.h node.cpp
+    linkedlist.h linkedlist.cpp
 )
 
 target_link_libraries(SimpleLinkedList
