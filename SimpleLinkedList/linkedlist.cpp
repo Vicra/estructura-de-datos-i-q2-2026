@@ -1,5 +1,7 @@
 #include "linkedlist.h"
 #include <iostream>
+#include <climits>
+
 
 using std::cout;
 using std::endl;
@@ -125,3 +127,34 @@ void LinkedList::remove(int x){
     }
 }
 
+bool LinkedList::search(int x){
+    // 1er caso lista vacia
+    if(this->tail == nullptr){
+        return false;
+    }
+    else {
+        Node* it = this->head;
+        while(it != nullptr) {
+            if(it->value == x) {
+                return true;
+            }
+            it= it->next;
+        }
+        return false;
+    }
+}
+
+int LinkedList::getByIndex(int i){
+    int cont = 0;
+    Node* it = this->head;
+    while(it != nullptr){
+        if(i == cont){
+            return it->value;
+        }
+        else {
+            it = it->next;
+            cont ++;
+        }
+    }
+    return INT_MIN;
+}

@@ -14,6 +14,8 @@ public:
     void pushFront(int newValue);
     void print();
     void remove(int x);
+    bool search(int x);
+    int getByIndex(int i);
 
     LinkedList();
 };

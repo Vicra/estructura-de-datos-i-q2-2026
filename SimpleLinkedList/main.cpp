@@ -57,7 +57,25 @@ int main() {
     l.print();
     l.remove(40);
     l.print();
+    l.remove(35);
+    l.print();
+    cout << "Find 20: " << (l.search(20) == true ? "true" : "false") << endl;
+    cout << "Find 40: " << (l.search(40) == true ? "true" : "false") << endl;
+    cout << "Find 50: " << (l.search(50) == true ? "true" : "false") << endl;
+    cout << "Find 30: " << (l.search(30) == true ? "true" : "false") << endl;
 
+    int value = l.getByIndex(2);
+    if(value == INT_MIN){
+        cout << "Indice no existe" << endl;
+    } else {
+        cout << "Valor en indice 2" << " es:" << value << endl;
+    }
 
+    value = l.getByIndex(4);
+    if(value == INT_MIN){
+        cout << "Indice no existe" << endl;
+    } else {
+        cout << "Valor en indice 2" << " es:" << value << endl;
+    }
     return 0;
 }
