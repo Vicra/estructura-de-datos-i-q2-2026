@@ -47,7 +47,17 @@ int main() {
     l.pushFront(10);
     l.pushFront(20);
     l.pushFront(30);
+    l.pushFront(40);
+    l.pushFront(50);
+    l.pushFront(60);
     l.print();
+    l.remove(10);
+    l.print();
+    l.remove(60);
+    l.print();
+    l.remove(40);
+    l.print();
+
 
     return 0;
 }

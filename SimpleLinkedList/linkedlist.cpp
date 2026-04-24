@@ -96,9 +96,32 @@ void LinkedList::remove(int x){
         // it ya esta en el penultimo
         Node* tmp = this->tail;
         this->tail = it;
+        this->tail->next = nullptr;
         delete tmp;
+    }
 
+    else {
+        // el que quiero borrar no esta en la cabeza, ni en la cola
+        // o no existe
+        // 1->2->2->6->8  borrar(7)
 
+        Node* it = this->head;
+        while(it->next != nullptr) {
+            if(it->next->value == x){
+                // borrar
+                Node* tmp = it->next;
+                it->next = it->next->next;
+
+                // it.next = tmp.next
+                // es lo mismo de arriba
+
+                delete tmp;
+                return;
+            } else {
+                it = it->next;
+            }
+        }
+        // fin de iteracion no lo encontro
     }
 }
 

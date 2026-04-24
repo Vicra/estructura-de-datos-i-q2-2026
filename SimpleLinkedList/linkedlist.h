@@ -13,6 +13,7 @@ public:
     void insert(int newValue);
     void pushFront(int newValue);
     void print();
+    void remove(int x);
 
     LinkedList();
 };
