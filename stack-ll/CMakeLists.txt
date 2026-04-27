@@ -7,6 +7,8 @@ qt_standard_project_setup()
 
 qt_add_executable(stack-ll
     main.cpp
+    stackll.h stackll.cpp
+    node.h node.cpp
 )
 
 target_link_libraries(stack-ll
