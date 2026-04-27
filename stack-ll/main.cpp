@@ -13,5 +13,8 @@ int main(){
     ll.pop();
     ll.print();
 
+    ll.clear();
+    ll.print();
+
     return 0;
 }

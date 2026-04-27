@@ -25,11 +25,15 @@ void StackLL::push(int x){
 
 void StackLL::print(){
     Node*it = this->head;
+    if(it == nullptr) {
+        cout << "Stack vacio" << endl;
+    }
     while(it!= nullptr){
         cout << it->value << "->";
         it = it->next;
     }
     cout << "nullptr" << endl;
+    this->peek();
 }
 
 int StackLL::pop(){
@@ -43,4 +47,19 @@ int StackLL::pop(){
     delete tmp;
     return valueToReturn;
 
+}
+
+void StackLL::peek(){
+    if(this->head == nullptr){
+        cout << "Empty head" << endl;
+        return;
+    }
+    cout << "Peek: " << this->head->value << endl;
+}
+
+void StackLL::clear(){
+    while(this->head != nullptr){
+        this->pop();
+    }
+    return;
 }

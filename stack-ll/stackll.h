@@ -18,6 +18,10 @@ public:
     int pop();
 
     void print();
+
+    void peek();
+
+    void clear();
 };
 
 #endif // STACKLL_H
