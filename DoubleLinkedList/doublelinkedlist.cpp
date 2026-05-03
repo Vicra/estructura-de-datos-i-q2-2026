@@ -7,7 +7,7 @@ DoubleLinkedList::DoubleLinkedList() {
     this->tail = nullptr;
     this->size = 0;
 }
-
+// push back
 void DoubleLinkedList::insert(string val){
     Node* newNode = new Node(val);
 
@@ -100,4 +100,40 @@ void DoubleLinkedList::print(){
     }
     cout << "Size: " << this->size ;
     cout << endl << endl;
+}
+
+void DoubleLinkedList::pushFront(string x){
+    Node* newNode = new Node(x);
+
+    this->size ++;
+
+    // 1er caso: lista vacia
+    if(this->tail == nullptr){
+        this->tail = newNode;
+        this->head = newNode;
+        return;
+    }
+
+    // 2do caso: lista no vacia
+    newNode->next = this->head;
+    this->head->prev = newNode;
+    this->head = newNode;
+}
+
+bool DoubleLinkedList::searchBackwards(string x){
+    // 1er caso: lista vacia
+    if(this->tail == nullptr) {
+        return false;
+    }
+
+    // 2do caso: buscar, a partir de la cola
+    Node* it = this->tail;
+    while(it != nullptr) {
+        if(it->value == x){
+            return true;
+        }
+        // iterar
+        it = it->prev;
+    }
+    return false;
 }

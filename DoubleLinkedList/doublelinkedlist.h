@@ -13,9 +13,11 @@ public:
     int size;
 
     // operations
-    void insert(string val);
+    void insert(string val);// push back
     void deleteByIndex(int pos);
     void print();
+    void pushFront(string x);
+    bool searchBackwards(string x);
 };
 
 #endif // DOUBLELINKEDLIST_H
