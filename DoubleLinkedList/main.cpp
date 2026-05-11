@@ -43,5 +43,9 @@ int main() {
     cout << "Search A: "
          << (dll.searchBackwards("A") == true ? "true": "false")
          << endl;
+
+    dll.reverse();
+    cout << "Reversed:" << endl;
+    dll.print();
     return 0;
 }

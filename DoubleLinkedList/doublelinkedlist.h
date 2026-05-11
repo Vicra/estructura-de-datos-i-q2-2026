@@ -18,6 +18,7 @@ public:
     void print();
     void pushFront(string x);
     bool searchBackwards(string x);
+    void reverse();
 };
 
 #endif // DOUBLELINKEDLIST_H

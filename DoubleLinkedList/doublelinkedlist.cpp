@@ -137,3 +137,39 @@ bool DoubleLinkedList::searchBackwards(string x){
     }
     return false;
 }
+
+void DoubleLinkedList::reverse(){
+    // caso base: no hay elementos
+    if(this->head == nullptr) return;
+
+    // asignar el tail
+    this->tail = this->head;
+
+    // iteradores o temporales
+    Node* tmp1 = this->head;
+    Node* tmp2 = tmp1->next;
+
+    // primera iteracion
+    tmp1->next = nullptr;
+    tmp1->prev = tmp2;
+
+    while(tmp2 != nullptr){
+        tmp2->prev = tmp2->next;
+        tmp2->next = tmp1;
+
+        // iterar
+        tmp1 = tmp2;
+        tmp2 = tmp2->prev;
+    }
+
+    // tmp2 es null y tmp1 es quien anteriormente era el ultimo
+    // reasignar el head
+    this->head = tmp1;
+}
+
+
+
+
+
+
+
