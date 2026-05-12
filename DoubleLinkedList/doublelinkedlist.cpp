@@ -69,6 +69,29 @@ void DoubleLinkedList::deleteByIndex(int pos){
         this->size--;
         return;
     }
+
+    // 5to caso: borrar por indice
+    int cont = 0;
+    Node* it = this->head;
+    while(it != nullptr){
+        if(cont == pos){
+            Node* tmp = it;
+            // delete
+            // 1er iteracion cont=0, pos?
+            // 2da iteracion cont=1, pos=1
+
+            // actualizar 2 punteros el siguiente del de la izq y el anterior del de la der
+            it->next->prev = it->prev;
+            it->prev->next = it->next;
+
+            delete tmp;
+            this->size--;
+            return;
+        }
+        it = it->next;
+        cont++;
+    }
+
 }
 
 void DoubleLinkedList::print(){
@@ -167,6 +190,58 @@ void DoubleLinkedList::reverse(){
     this->head = tmp1;
 }
 
+void DoubleLinkedList::insertAfterNode(Node *reference, string val){
+    if(reference == nullptr) return;
+
+    Node* newNode = new Node(val); // C.5
+    Node* rightRef = reference->next;
+
+    newNode->next = rightRef;
+    newNode->prev = reference;
+
+    reference->next = newNode;
+
+    if(rightRef != nullptr){
+        rightRef->prev = newNode;
+    }
+    this->size++;
+}
+
+void DoubleLinkedList::deleteByReference(Node *reference){
+    if(reference == nullptr) return;
+
+    Node* tmp = reference;
+    // START CODE
+
+    // 1er caso borrar la cabeza
+    if(reference == this->head){
+        this->head = this->head->next;
+        if(this->head != nullptr){
+            this->head->prev = nullptr;
+        }
+
+        // borrar head and tail
+        if(reference == this->tail){
+            this->tail = this->tail->prev;
+        }
+    }
+    // 2do caso: borrar la cola
+    else if(reference == this->tail){
+        this->tail = this->tail->prev;
+        if(this->tail != nullptr) {
+            this->tail->next = nullptr;
+        }
+    }
+    // 3er caso: borrar nodo intermedio
+    else {
+        reference->prev->next = reference->next;
+        reference->next->prev = reference->prev;
+    }
+
+    this->size --;
+    // END CODE
+    delete tmp;
+}
 
 
 

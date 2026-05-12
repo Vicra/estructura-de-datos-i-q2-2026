@@ -47,5 +47,26 @@ int main() {
     dll.reverse();
     cout << "Reversed:" << endl;
     dll.print();
+    dll.insertAfterNode(dll.head->next, "C.5");
+    dll.print();
+    dll.deleteByReference(dll.head->next->next); // C.5
+    dll.print();
+    dll.deleteByReference(dll.head);// D
+    dll.print();
+    dll.deleteByReference(dll.head);// C
+    dll.print();
+    dll.deleteByReference(dll.tail);// A
+    dll.print();
+
+    dll.deleteByReference(dll.tail);// B
+    dll.print();
+
+    dll.insert("A");
+    dll.insert("B");
+    dll.insert("C");
+    dll.insert("D");
+    dll.print();
+    dll.deleteByIndex(2); //C
+    dll.print();
     return 0;
 }
