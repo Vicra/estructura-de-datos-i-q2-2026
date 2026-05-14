@@ -14,9 +14,8 @@ public:
 
     // operations
     void insert(string val);// push back
-
-    // TODO: terminar delete by index
     void deleteByIndex(int pos);
+    // TODO: insert by index
     void print();
     void pushFront(string x);
     bool searchBackwards(string x);
@@ -24,6 +23,7 @@ public:
 
     // by reference methods
     void insertAfterNode(Node *reference, string val);
+    // insertBeforeNode(ref, val)
     void deleteByReference(Node *reference);
     // delete by reference
     // insert start
