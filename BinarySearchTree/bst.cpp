@@ -21,6 +21,7 @@ void BST::insert(int val){
 
     // 2 caso: arbol no vacio
     this->root = insertRecursive(this->root, newNode);
+    return;
 }
 
 Node* BST::insertRecursive(Node*currentRoot, Node* newNode){
@@ -59,3 +60,66 @@ Node* BST::searchRecursive(Node* currentRoot, int val){
         return this->searchRecursive(currentRoot->left, val);
     }
 }
+
+Node* BST::mostLeftChild(Node * currentRoot){
+    while(currentRoot->left != nullptr){
+        currentRoot = currentRoot->left;
+    }
+    return currentRoot;
+}
+
+Node* BST::successor(Node* currentRoot){
+    return this->mostLeftChild(currentRoot->right);
+}
+
+void BST::remove(int val){
+    // case 1, val: 25
+    this->root = this->removeRecursive(this->root, val);
+}
+
+Node* BST::removeRecursive(Node* currentRoot, int val){
+    if(val < currentRoot->value){
+        currentRoot->left = this->removeRecursive(currentRoot->left, val);
+    }
+    else if(val > currentRoot->value){
+        // TODO: falta algo
+        currentRoot->right = this->removeRecursive(currentRoot->right, val);
+    }
+    else {
+        // borrar
+        // 1er caso: no tiene hijos
+        if(currentRoot->left == nullptr
+            && currentRoot->right == nullptr ){
+            delete currentRoot;
+            return nullptr;
+        }
+
+        // 2do caso: tengo un hijo por la izquierda
+        else if(currentRoot->right == nullptr){
+            Node* nodeToAscend = currentRoot->left;
+            delete currentRoot;
+            return nodeToAscend;
+        }
+
+        // 3er caso: tengo un hijo por la derecha
+        else if(currentRoot->left == nullptr){
+            Node* nodeToAscend = currentRoot->right;
+            delete currentRoot;
+            return nodeToAscend;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
