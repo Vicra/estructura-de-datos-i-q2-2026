@@ -13,6 +13,10 @@ private:
     Node* successor(Node* currentRoot);
     Node* removeRecursive(Node* currentRoot, int val);
     void printHelper(string prefix, Node *currentRoot, bool isLeft);
+
+    void inorderHelper(Node* currentRoot);
+    void preorderHelper(Node* currentRoot);
+    void postorderHelper(Node* currentRoot);
 public:
     BST();
 
@@ -23,7 +27,11 @@ public:
     bool search(int val);
     void remove(int val);
     void print();
-    // remove
+
+    // traverse operations (recorridos)
+    void inorder();
+    void preorder();
+    void postorder();
 };
 
 #endif // BST_H

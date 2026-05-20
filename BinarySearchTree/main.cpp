@@ -19,12 +19,18 @@ int main() {
     cout << "Searching 101 ..." << tree.search(101) <<endl;
     cout << "Searching 88 ..." << tree.search(88) <<endl;
     cout << "Tree" << endl;
-    tree.remove(10);
+    // tree.remove(10);
     tree.print();
-    tree.remove(20);
+    // tree.remove(20);
     tree.print();
-    tree.remove(7);
-    tree.remove(5);
+    // tree.remove(7);
+    // tree.remove(5);
     tree.print();
+    cout << "Inorder :";
+    tree.inorder();
+    cout << endl << "Preorder :";
+    tree.preorder();
+    cout << endl << "Postorder :";
+    tree.postorder();
     return 0;
 }

@@ -156,8 +156,41 @@ void BST::print(){
     this->printHelper("", this->root, false);
 }
 
+void BST::inorder(){
+    return this->inorderHelper(this->root);
+}
 
+void BST::preorder(){
+    return this->preorderHelper(this->root);
+}
 
+void BST::postorder(){
+    return this->postorderHelper(this->root);
+}
+
+void BST::inorderHelper(Node* currentRoot){
+    if(currentRoot != nullptr){
+        this->inorderHelper(currentRoot->left);
+        cout << currentRoot->value << " ";
+        this->inorderHelper(currentRoot->right);
+    }
+}
+
+void BST::preorderHelper(Node* currentRoot){
+    if(currentRoot != nullptr){
+        cout << currentRoot->value << " ";
+        this->preorderHelper(currentRoot->left);
+        this->preorderHelper(currentRoot->right);
+    }
+}
+
+void BST::postorderHelper(Node* currentRoot){
+    if(currentRoot != nullptr){
+        this->postorderHelper(currentRoot->left);
+        this->postorderHelper(currentRoot->right);
+        cout << currentRoot->value << " ";
+    }
+}
 
 
 
