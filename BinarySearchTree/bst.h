@@ -1,6 +1,8 @@
 #ifndef BST_H
 #define BST_H
 #include "node.h"
+#include <string>
+using std::string;
 class BST
 {
 private:
@@ -10,7 +12,7 @@ private:
     Node* mostLeftChild(Node * currentRoot);
     Node* successor(Node* currentRoot);
     Node* removeRecursive(Node* currentRoot, int val);
-
+    void printHelper(string prefix, Node *currentRoot, bool isLeft);
 public:
     BST();
 
@@ -20,6 +22,7 @@ public:
     void insert(int val);
     bool search(int val);
     void remove(int val);
+    void print();
     // remove
 };
 

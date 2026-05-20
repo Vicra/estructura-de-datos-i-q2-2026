@@ -1,4 +1,10 @@
 #include "bst.h"
+#include <string>
+#include <iostream>
+
+using std::string;
+using std::cout;
+using std::endl;
 
 BST::BST() {
     this->root = nullptr;
@@ -107,9 +113,48 @@ Node* BST::removeRecursive(Node* currentRoot, int val){
             delete currentRoot;
             return nodeToAscend;
         }
+
+        // 4to caso: tengo 2 hijos
+        else {
+            Node* successor = this->successor(currentRoot);
+            currentRoot->value = successor->value;
+            currentRoot->right = this->removeRecursive(currentRoot->right, currentRoot->value);
+
+            /* Alternativa usando predecesor
+            Node* predeccessor = this->predeccessor(currentRoot);
+            currentRoot->value = predeccessor->value;
+            currentRoot->left = this->removeRecursive(currentRoot->left, val);
+            */
+        }
+    }
+    return currentRoot;
+}
+
+void BST::printHelper(string prefix, Node *currentRoot, bool isLeft)
+{
+    if( currentRoot != nullptr )
+    {
+        cout << prefix;
+
+        cout << (isLeft ? "├──" : "└──" );
+
+        // print the value of the node
+        cout << currentRoot->value << endl;
+
+        // enter the next tree level - left and right branch
+        printHelper( prefix + (isLeft ? "│   " : "    "), currentRoot->left, true);
+        printHelper( prefix + (isLeft ? "│   " : "    "), currentRoot->right, false);
+    }
+    else {
+        cout << prefix;
+        cout << (isLeft ? "├─" : "└─" );
+        cout << "nil" << endl;
     }
 }
 
+void BST::print(){
+    this->printHelper("", this->root, false);
+}
 
 
 
