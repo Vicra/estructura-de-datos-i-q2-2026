@@ -9,8 +9,13 @@ private:
     // recursive/private functions
     Node* insertRecursive(Node* currentRoot, Node* newNode);
     Node* searchRecursive(Node* currentRoot, int val);
+
     Node* mostLeftChild(Node * currentRoot);
+    // mostRightChild
+
     Node* successor(Node* currentRoot);
+    // predeccessor
+
     Node* removeRecursive(Node* currentRoot, int val);
     void printHelper(string prefix, Node *currentRoot, bool isLeft);
 
