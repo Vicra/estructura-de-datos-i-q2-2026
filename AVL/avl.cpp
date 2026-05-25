@@ -1,0 +1,247 @@
+#include "avl.h"
+#include <string>
+#include <iostream>
+
+using std::string;
+using std::cout;
+using std::endl;
+
+AVL::AVL() {
+    this->root = nullptr;
+}
+
+// public
+// insert(10)
+// insert(5)
+// insert(15)
+// insert(10)
+void AVL::insert(int val){
+    // instancia del nuevo nodo
+    Node* newNode = new Node(val);
+
+    // 1er caso: arbol vacio
+    if(this->root == nullptr){
+        this->root = newNode;
+        return;
+    }
+
+    // 2 caso: arbol no vacio
+    this->root = insertRecursive(this->root, newNode);
+    return;
+}
+
+Node* AVL::insertRecursive(Node*currentRoot, Node* newNode){
+    // 1er iteracion currentNode: 10, newNode: 5
+    // 2da iteracion currentNode: nullptr, newNode 5
+
+    // ----- segundo llamado del main
+
+    // 1er iteracion currentNode: 10, newNode: 15
+
+    if(currentRoot == nullptr) return newNode;
+
+    if(newNode->value < currentRoot->value){
+        currentRoot->left = insertRecursive(currentRoot->left, newNode);
+    } else if(newNode->value > currentRoot->value){
+        currentRoot->right = insertRecursive(currentRoot->right, newNode);
+    }
+
+    // calcular las alturas
+    int leftHeight = getHeight(currentRoot->left);
+    int rightHeight = getHeight(currentRoot->right);
+    int balanceFactor = leftHeight - rightHeight;
+
+    if(balanceFactor > 1 || balanceFactor < -1){
+        // esta desbalanceado
+        // Grupo: desbalance izq
+        if(balanceFactor > 1) {
+            Node* nodoIntermedio = currentRoot->left;
+
+            // Caso1: left left
+            if(nodoIntermedio->left != nullptr){
+                // 1 rotacion
+                currentRoot = rightRotate(currentRoot);
+            } else{
+                // Caso 2: Left right
+                // 2 rotaciones
+            }
+        }
+    }
+
+    return currentRoot;
+}
+
+bool AVL::search(int val){
+    Node* returnedNode = searchRecursive(this->root, val);
+    if(returnedNode == nullptr) return false;
+    return true;
+}
+
+Node* AVL::searchRecursive(Node* currentRoot, int val){
+    // caso si no lo encontre currentRoot: null, val: 17
+    if(currentRoot == nullptr) return nullptr;
+
+    // currentRoot: 10, val: 17
+    if(currentRoot->value == val) return currentRoot;
+    else if(val > currentRoot->value){
+        return this->searchRecursive(currentRoot->right, val);
+    } else {
+        return this->searchRecursive(currentRoot->left, val);
+    }
+}
+
+Node* AVL::mostLeftChild(Node * currentRoot){
+    while(currentRoot->left != nullptr){
+        currentRoot = currentRoot->left;
+    }
+    return currentRoot;
+}
+
+Node* AVL::successor(Node* currentRoot){
+    return this->mostLeftChild(currentRoot->right);
+}
+
+void AVL::remove(int val){
+    // case 1, val: 25
+    this->root = this->removeRecursive(this->root, val);
+}
+
+Node* AVL::removeRecursive(Node* currentRoot, int val){
+    if(val < currentRoot->value){
+        currentRoot->left = this->removeRecursive(currentRoot->left, val);
+    }
+    else if(val > currentRoot->value){
+        // TODO: falta algo
+        currentRoot->right = this->removeRecursive(currentRoot->right, val);
+    }
+    else {
+        // borrar
+        // 1er caso: no tiene hijos
+        if(currentRoot->left == nullptr
+            && currentRoot->right == nullptr ){
+            delete currentRoot;
+            return nullptr;
+        }
+
+        // 2do caso: tengo un hijo por la izquierda
+        else if(currentRoot->right == nullptr){
+            Node* nodeToAscend = currentRoot->left;
+            delete currentRoot;
+            return nodeToAscend;
+        }
+
+        // 3er caso: tengo un hijo por la derecha
+        else if(currentRoot->left == nullptr){
+            Node* nodeToAscend = currentRoot->right;
+            delete currentRoot;
+            return nodeToAscend;
+        }
+
+        // 4to caso: tengo 2 hijos
+        else {
+            Node* successor = this->successor(currentRoot);
+            currentRoot->value = successor->value;
+            currentRoot->right = this->removeRecursive(currentRoot->right, currentRoot->value);
+
+            /* Alternativa usando predecesor
+            Node* predeccessor = this->predeccessor(currentRoot);
+            currentRoot->value = predeccessor->value;
+            currentRoot->left = this->removeRecursive(currentRoot->left, val);
+            */
+        }
+    }
+    return currentRoot;
+}
+
+void AVL::printHelper(string prefix, Node *currentRoot, bool isLeft)
+{
+    if( currentRoot != nullptr )
+    {
+        cout << prefix;
+
+        cout << (isLeft ? "├──" : "└──" );
+
+        // print the value of the node
+        cout << currentRoot->value << endl;
+
+        // enter the next tree level - left and right branch
+        printHelper( prefix + (isLeft ? "│   " : "    "), currentRoot->left, true);
+        printHelper( prefix + (isLeft ? "│   " : "    "), currentRoot->right, false);
+    }
+    else {
+        cout << prefix;
+        cout << (isLeft ? "├─" : "└─" );
+        cout << "nil" << endl;
+    }
+}
+
+void AVL::print(){
+    this->printHelper("", this->root, false);
+}
+
+void AVL::inorder(){
+    return this->inorderHelper(this->root);
+}
+
+void AVL::preorder(){
+    return this->preorderHelper(this->root);
+}
+
+void AVL::postorder(){
+    return this->postorderHelper(this->root);
+}
+
+void AVL::inorderHelper(Node* currentRoot){
+    if(currentRoot != nullptr){
+        this->inorderHelper(currentRoot->left);
+        cout << currentRoot->value << " ";
+        this->inorderHelper(currentRoot->right);
+    }
+}
+
+void AVL::preorderHelper(Node* currentRoot){
+    if(currentRoot != nullptr){
+        cout << currentRoot->value << " ";
+        this->preorderHelper(currentRoot->left);
+        this->preorderHelper(currentRoot->right);
+    }
+}
+
+void AVL::postorderHelper(Node* currentRoot){
+    if(currentRoot != nullptr){
+        this->postorderHelper(currentRoot->left);
+        this->postorderHelper(currentRoot->right);
+        cout << currentRoot->value << " ";
+    }
+}
+
+Node* AVL::leftRotate(Node* x){
+    Node* y = x->right;
+    Node* T1 = y->left;
+
+    // reassign pointers
+    x->right = T1;
+    y->left = x;
+
+    return y;
+}
+
+Node* AVL::rightRotate(Node* y){
+    Node* x = y->left;
+    Node*T1 = x->right;
+
+    y->left = T1;
+    x->right = y;
+
+    return x;
+}
+
+
+
+
+
+
+
+
+
+
