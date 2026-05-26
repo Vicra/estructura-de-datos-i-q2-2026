@@ -20,6 +20,10 @@ private:
     // rotations
     Node* leftRotate(Node* x);
     Node* rightRotate(Node* y);
+
+    int getHeight(Node* node);
+    int getBalance(Node* node);
+    int max(int a, int b);
 public:
     AVL();
 

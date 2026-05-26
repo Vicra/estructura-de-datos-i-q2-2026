@@ -8,6 +8,7 @@ public:
     Node* left;
     Node* right;
     int value;
+    int height;
 };
 
 #endif // NODE_H

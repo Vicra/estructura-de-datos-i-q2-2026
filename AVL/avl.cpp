@@ -46,7 +46,13 @@ Node* AVL::insertRecursive(Node*currentRoot, Node* newNode){
         currentRoot->right = insertRecursive(currentRoot->right, newNode);
     }
 
-    // calcular las alturas
+    // actualizar el height
+    currentRoot->height = this->max(
+        this->getHeight(currentRoot->left),
+        this->getHeight(currentRoot->right)
+    ) + 1;
+
+    // calcular factor de balance
     int leftHeight = getHeight(currentRoot->left);
     int rightHeight = getHeight(currentRoot->right);
     int balanceFactor = leftHeight - rightHeight;
@@ -60,10 +66,21 @@ Node* AVL::insertRecursive(Node*currentRoot, Node* newNode){
             // Caso1: left left
             if(nodoIntermedio->left != nullptr){
                 // 1 rotacion
-                currentRoot = rightRotate(currentRoot);
+                return rightRotate(currentRoot);
             } else{
                 // Caso 2: Left right
                 // 2 rotaciones
+                currentRoot->left = leftRotate(currentRoot->left);
+                return rightRotate(currentRoot);
+            }
+        }
+        else if(balanceFactor < -1){
+            Node* nodoIntermedio = currentRoot->right;
+            if(nodoIntermedio->left == nullptr){
+                return leftRotate(currentRoot);
+            } else {
+                currentRoot->right = rightRotate(currentRoot->right);
+                return leftRotate(currentRoot);
             }
         }
     }
@@ -223,6 +240,8 @@ Node* AVL::leftRotate(Node* x){
     x->right = T1;
     y->left = x;
 
+    // actualizar los heights
+
     return y;
 }
 
@@ -233,11 +252,24 @@ Node* AVL::rightRotate(Node* y){
     y->left = T1;
     x->right = y;
 
+    // actualizar los heights
+
     return x;
 }
 
+int AVL::getHeight(Node* node){
+    if(node == nullptr) return 0;
+    return node->height;
+}
 
+int AVL::getBalance(Node* node){
+    if(node == nullptr) return 0;
+    return this->getHeight(node->left) - this->getHeight(node->right);
+}
 
+int AVL::max(int a, int b){
+    return (a > b) ? a : b;
+}
 
 
 
