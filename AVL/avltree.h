@@ -1,10 +1,11 @@
-#ifndef AVL_H
-
-#define BST_H
+#ifndef AVLTREE_H
+#define AVLTREE_H
 #include "node.h"
+
 #include <string>
 using std::string;
-class AVL
+
+class AVLTree
 {
 private:
     Node* insertRecursive(Node* currentRoot, Node* newNode);
@@ -25,8 +26,7 @@ private:
     int getBalance(Node* node);
     int max(int a, int b);
 public:
-    AVL();
-
+    AVLTree();
     Node* root;
     void insert(int val);
     bool search(int val);
@@ -37,4 +37,4 @@ public:
     void postorder();
 };
 
-#endif // AVL_H
+#endif // AVLTREE_H

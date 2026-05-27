@@ -7,8 +7,9 @@ qt_standard_project_setup()
 
 qt_add_executable(AVL
     main.cpp
-    avl.h avl.cpp
+
     node.h node.cpp
+    avltree.h avltree.cpp
 )
 
 target_link_libraries(AVL
