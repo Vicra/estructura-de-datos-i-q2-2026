@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect><x>0</x><y>0</y><width>1000</width><height>600</height></rect>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayoutMain"><item><layout class="QVBoxLayout" name="verticalLayoutLeft"><item><widget class="QPushButton" name="btnLinkedList"><property name="text"><string>Lista Enlazada</string></property></widget>
+   </item><item><widget class="QPushButton" name="btnDoubleLinkedList"><property name="text"><string>Lista Doble</string></property></widget>
+   </item><item><widget class="QPushButton" name="btnStack"><property name="text"><string>Stack</string></property></widget>
+   </item><item><widget class="QPushButton" name="btnQueue"><property name="text"><string>Queue</string></property></widget>
+   </item><item><widget class="QPushButton" name="btnBST"><property name="text"><string>BST</string></property></widget>
+   </item><item><widget class="QPushButton" name="btnAVL"><property name="text"><string>AVL</string></property></widget>
+  </item></layout></item><item><layout class="QVBoxLayout" name="verticalLayoutCenter"><item><widget class="QGraphicsView" name="graphicsView">
+    </widget>
+   </item><item><layout class="QHBoxLayout" name="horizontalLayoutBottom"><item><widget class="QLineEdit" name="valueInput">
+    </widget>
+   </item><item><widget class="QPushButton" name="insertButton"><property name="text"><string>Insertar</string></property></widget>
+   </item><item><widget class="QPushButton" name="removeButton"><property name="text"><string>Eliminar</string></property></widget>
+   </item><item><widget class="QPushButton" name="searchButton"><property name="text"><string>Buscar</string></property></widget>
+   </item><item><widget class="QPushButton" name="traverseButton"><property name="text"><string>Recorrer</string></property></widget>
+   </item><item><widget class="QPushButton" name="saveButton"><property name="text"><string>Guardar</string></property></widget>
+   </item><item><widget class="QPushButton" name="loadButton"><property name="text"><string>Cargar</string></property></widget>
+   </item><item><widget class="QPushButton" name="clearButton"><property name="text"><string>Clear</string></property></widget>
+   </item></layout></item></layout></item></layout></widget>
+ <property name="styleSheet"><string>
+QMainWindow {
+    background-color: #2E3440;
+}
+QPushButton {
+    background-color: #4C566A;
+    color: white;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-family: "Segoe UI";
+}
+QPushButton:hover {
+    background-color: #5E81AC;
+}
+QLineEdit {
+    background-color: #3B4252;
+    border: 1px solid #5E81AC;
+    border-radius: 4px;
+    padding: 4px;
+    color: white;
+    font-family: "Segoe UI";
+}
+</string></property></widget>
+ <resources />
+ <connections />
+</ui>
